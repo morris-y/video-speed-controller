@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<style>
+  :root { color-scheme: light dark; --fg: #111; --muted: #6b7280; --line: #e5e7eb; --btn: #f3f4f6; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg: #f3f4f6; --muted: #9ca3af; --line: #374151; --btn: #1f2937; }
+  }
+  body {
+    margin: 0; width: 232px; padding: 16px;
+    font: 13px/1.5 system-ui, -apple-system, "PingFang TC", sans-serif; color: var(--fg);
+  }
+  .row { display: flex; align-items: center; gap: 8px; }
+  button {
+    font: inherit; color: inherit; background: var(--btn);
+    border: 1px solid var(--line); border-radius: 8px; cursor: pointer;
+  }
+  button:hover { filter: brightness(0.96); }
+  .step { width: 40px; height: 44px; font-size: 20px; }
+  #rate {
+    flex: 1; height: 44px; min-width: 0; text-align: center;
+    font: 600 22px/1 system-ui, sans-serif; color: inherit;
+    background: transparent; border: 1px solid var(--line); border-radius: 8px;
+  }
+  #reset { width: 100%; height: 30px; margin-top: 10px; }
+  p { margin: 12px 0 0; color: var(--muted); font-size: 11.5px; }
+  kbd {
+    padding: 1px 5px; border: 1px solid var(--line); border-bottom-width: 2px;
+    border-radius: 4px; font: 11px/1.4 ui-monospace, monospace;
+  }
+</style>
+</head>
+<body>
+  <div class="row">
+    <button class="step" id="slower" title="減速 0.1×">−</button>
+    <input id="rate" inputmode="decimal" autocomplete="off" aria-label="播放倍數">
+    <button class="step" id="faster" title="加速">+</button>
+  </div>
+  <button id="reset">回到 1×</button>
+  <p><kbd>X</kbd> 加速　<kbd>Z</kbd> 減速　<kbd>R</kbd> 回到 1×</p>
+  <script src="speed.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
