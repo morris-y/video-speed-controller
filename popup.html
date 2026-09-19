@@ -16,7 +16,9 @@
     font: inherit; color: inherit; background: var(--btn);
     border: 1px solid var(--line); border-radius: 8px; cursor: pointer;
   }
-  button:hover { filter: brightness(0.96); }
+  button:hover:not(:disabled) { filter: brightness(0.96); }
+  button:disabled, #rate:disabled { opacity: .45; cursor: default; }
+  #rate::placeholder { font: 400 12px/1 system-ui, sans-serif; color: var(--muted); }
   .step { width: 40px; height: 44px; font-size: 20px; }
   #rate {
     flex: 1; height: 44px; min-width: 0; text-align: center;

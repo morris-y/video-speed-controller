@@ -13,11 +13,15 @@
 例：`1×` 按 X →`1.8×` 按 Z →`1.7×` 按 X →`1.8×` 按 X →`1.9×`
 
 倍數範圍夾在 0.1× 到 16×（16× 是 Chrome 自己的上限，再高瀏覽器會丟錯）。
-游標在輸入框、文字區或可編輯區域裡時不會觸發，按鍵交還給網頁。
+改變倍數時畫面右上角會跳一個提示，告訴你現在幾倍。
+
+不會誤觸的情況：游標在輸入框、文字區或可編輯區域裡時按鍵交還給網頁；`Shift`、`Ctrl`、`⌘`、`Alt` 的組合鍵也不攔截，留給網站自己的快捷鍵。頁面上沒有影片時按這幾個鍵完全沒有反應。
 
 ## 彈窗
 
 點工具列的圖示會開一個小面板：中間顯示目前倍數，也可以直接改數字（例如輸入 `4` 再按 Enter 就是 4×），兩側是 −／+ 按鈕，下面一顆「回到 1×」。
+
+在 `chrome://` 設定頁、擴充功能商店這類 Chrome 不允許注入程式碼的頁面上，面板會整個變灰並顯示「這個頁面不能用」，而不是給你一個按了沒反應的數字。
 
 ## 安裝（開發者模式）
 
@@ -30,7 +34,7 @@
 要分給別人時再打包成 zip：
 
 ```sh
-zip -r video-speed-controller.zip . -x '.git/*' '*.zip' '.DS_Store' 'test.mjs'
+zip -r video-speed-controller.zip . -x '.git/*' 'node_modules/*' '*.zip' '.DS_Store'
 ```
 
 對方解壓縮後，一樣用上面第 3 步選解開的資料夾。
@@ -47,6 +51,14 @@ zip -r video-speed-controller.zip . -x '.git/*' '*.zip' '.DS_Store' 'test.mjs'
 | `popup.js` / `popup.html` | 工具列彈窗 |
 | `icons/generate.py` | 重新產生圖示用（沒有它就沒辦法重建 PNG） |
 | `test.mjs` | 倍數計算的檢查，`node test.mjs` |
+
+### 三個容易踩到的地方
+
+**影片藏在 shadow DOM 裡。** 有些網站把播放器包成 web component，影片在自訂元素的 shadow root 內，一般的 `querySelectorAll('video')` 穿不過去。`content.js` 的 `collectVideos()` 會自己往下走每一層 shadow root。同理，shadow DOM 發出的 `play` 事件在 document 層會被改寫成外層的 host 元素，所以判斷事件來源要用 `composedPath()[0]` 而不是 `event.target`。
+
+**提示要畫在最外層。** 影片常常在很小的嵌入 iframe 裡。提示如果畫在有影片的那一層，會被播放器邊界裁掉，使用者按了鍵等於沒有回饋。所以有影片的那層只負責回報「我套用了」，由 background 指定最外層（`frameId: 0`）去畫提示。
+
+**倍數是記住的。** 同一個分頁重新整理、甚至換去別的網站，倍數都會接回來（這是刻意的，通常你想要的就是這樣）。為了不讓人莫名其妙覺得影片變快了，接回來的當下一樣會跳提示。換分頁則互不影響，關掉分頁就清掉。
 
 ### 為什麼倍數要放在 background，不直接放在網頁裡
 
@@ -70,4 +82,4 @@ node test.mjs
 node e2e.mjs
 ```
 
-`e2e.mjs` 會在真的 Chromium 裡載入這個擴充功能，實際按鍵確認影片加速、iframe 內的影片有跟上、輸入框裡打字不會被攔截、重新整理後倍數接得回來、彈窗按鈕有效。需要先裝 playwright：`npm i -g playwright && playwright install chromium`。
+`e2e.mjs` 會在真的 Chromium 裡載入這個擴充功能，跑 20 項檢查：快捷鍵的四種行為、shadow DOM 裡的影片、iframe 內的影片、提示畫在最外層、輸入框與 Shift 組合鍵不被攔截、重新整理後接回倍數、彈窗的顯示與各個按鈕、超出範圍的輸入被夾住、控制不了的頁面彈窗要停用。需要先裝 playwright：`npm i -g playwright && playwright install chromium`。
