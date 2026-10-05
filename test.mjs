@@ -5,18 +5,15 @@ import assert from 'node:assert/strict';
 eval(readFileSync(new URL('./speed.js', import.meta.url), 'utf8'));
 const { nextRate, toggleRate, clampRate, formatRate, DEFAULT_RATE, MIN_RATE, MAX_RATE } = globalThis.VSC;
 
-// 需求裡的那串操作：1 →(X) 1.8 →(Z) 1.7 →(X) 1.8
-assert.equal(nextRate(1, 1), 1.8);
-assert.equal(nextRate(1.8, -1), 1.7);
+// X / Z 不管在哪個倍數都是一次 ±0.1，不會跳到預設倍數
+assert.equal(nextRate(1, 1), 1.1);
+assert.equal(nextRate(1.1, 1), 1.2);
 assert.equal(nextRate(1.7, 1), 1.8);
-
-// 到了預設倍數之後，X 才是一次 +0.1
 assert.equal(nextRate(1.8, 1), 1.9);
 assert.equal(nextRate(1.9, 1), 2);
+assert.equal(nextRate(0.5, 1), 0.6);
+assert.equal(nextRate(1.8, -1), 1.7);
 assert.equal(DEFAULT_RATE, 1.8);
-
-// 慢速區按 X 一樣先跳回預設倍數
-assert.equal(nextRate(0.5, 1), 1.8);
 
 // 浮點誤差不外洩：1.9000000000000001 之類的值不該出現
 assert.equal(nextRate(2.9, 1), 3);

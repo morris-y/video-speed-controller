@@ -11,12 +11,8 @@ globalThis.VSC = (() => {
       ? Math.min(MAX_RATE, Math.max(MIN_RATE, Math.round(rate * 100) / 100))
       : 1;
 
-  // direction: +1 加速（X）、-1 減速（Z）
-  // 還沒到預設倍數時，按 X 一步跳到預設倍數；到了之後才一次 +0.1
-  const nextRate = (current, direction, preferred = DEFAULT_RATE) =>
-    direction > 0 && current < preferred
-      ? clampRate(preferred)
-      : clampRate(current + direction * STEP);
+  // direction: +1 加速（X）、-1 減速（Z），一律一次 0.1。要一鍵到預設倍數用 R
+  const nextRate = (current, direction) => clampRate(current + direction * STEP);
 
   // R：不在預設倍數就跳過去；已經在預設倍數才回 1×
   const toggleRate = (current, preferred = DEFAULT_RATE) =>

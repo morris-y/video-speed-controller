@@ -93,16 +93,17 @@ async function expectOsd(want, label, p = page) {
 }
 
 await expectRate(1, '初始');
-await page.keyboard.press('x'); await expectRate(1.8, 'X 從 1 跳到預設倍數');
-await page.keyboard.press('z'); await expectRate(1.7, 'Z 減速');
-await page.keyboard.press('x'); await expectRate(1.8, 'X 回到 1.8');
-await page.keyboard.press('x'); await expectRate(1.9, 'X 再 +0.1');
+await page.keyboard.press('x'); await expectRate(1.1, 'X 從 1 只 +0.1，不跳到 1.8');
+await page.keyboard.press('x'); await expectRate(1.2, 'X 再 +0.1');
+await page.keyboard.press('z'); await expectRate(1.1, 'Z 減速');
+await page.keyboard.press('r'); await expectRate(1.8, 'R 從 1.1 跳到 1.8');
+await page.keyboard.press('x'); await expectRate(1.9, 'X 從 1.8 +0.1');
 await expectRate(1.9, 'shadow DOM 裡的影片也跟上', { read: READ_SHADOW });
 await page.keyboard.press('r'); await expectRate(1.8, 'R 從 1.9 先回 1.8');
 await page.keyboard.press('r'); await expectRate(1, 'R 從 1.8 切到 1');
 
 // iframe 裡的影片也要跟著（在最外層按鍵）
-await page.keyboard.press('x');
+await page.keyboard.press('r');
 await expectRate(1.8, 'iframe 內影片同步', { frame: await waitForInnerFrame(page) });
 await expectOsd('1.8×', '畫面提示');
 
@@ -128,8 +129,8 @@ const embed = await ctx.newPage();
 await embed.goto(`${base}/embed-only`);
 await embed.click('body');
 await embed.keyboard.press('x'); // 焦點在最外層，但影片在 iframe 裡
-await expectRate(1.8, '最外層按鍵控制得到 iframe 裡的影片', { frame: await waitForInnerFrame(embed) });
-await expectOsd('1.8×', '最外層沒有影片時，提示仍畫在最外層', embed);
+await expectRate(1.1, '最外層按鍵控制得到 iframe 裡的影片', { frame: await waitForInnerFrame(embed) });
+await expectOsd('1.1×', '最外層沒有影片時，提示仍畫在最外層', embed);
 await embed.close();
 
 // 彈窗的 UI 與 background 協定
