@@ -1,7 +1,7 @@
 // 倍數以「分頁」為單位保管，快捷鍵與彈窗都經過這裡，再廣播給該分頁的所有 frame。
 import './speed.js';
 
-const { nextRate, clampRate } = globalThis.VSC;
+const { nextRate, toggleRate, clampRate } = globalThis.VSC;
 const key = (tabId) => `rate:${tabId}`;
 
 // 連按 X 時多個訊息會同時進來，串成佇列避免讀到同一個舊值（read-modify-write race）
@@ -13,6 +13,7 @@ async function handle(msg, tabId) {
 
   const rate =
     msg.type === 'step' ? nextRate(current, msg.direction)
+    : msg.type === 'toggle' ? toggleRate(current)
     : msg.type === 'set' ? clampRate(Number(msg.rate))
     : null; // 'get' 和任何沒認得的型別都只回報現值，不改動
   if (rate === null) return current;

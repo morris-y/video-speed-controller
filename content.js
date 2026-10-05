@@ -73,7 +73,7 @@
       const message =
         key === 'x' ? { type: 'step', direction: 1 }
         : key === 'z' ? { type: 'step', direction: -1 }
-        : key === 'r' ? { type: 'set', rate: 1 }
+        : key === 'r' ? { type: 'toggle' }
         : null;
       // 不呼叫 preventDefault：沒有影片的頁面按這幾個鍵應該完全無感
       if (message) chrome.runtime.sendMessage(message).catch(() => {});

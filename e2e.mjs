@@ -98,7 +98,8 @@ await page.keyboard.press('z'); await expectRate(1.7, 'Z 減速');
 await page.keyboard.press('x'); await expectRate(1.8, 'X 回到 1.8');
 await page.keyboard.press('x'); await expectRate(1.9, 'X 再 +0.1');
 await expectRate(1.9, 'shadow DOM 裡的影片也跟上', { read: READ_SHADOW });
-await page.keyboard.press('r'); await expectRate(1, 'R 重設');
+await page.keyboard.press('r'); await expectRate(1.8, 'R 從 1.9 先回 1.8');
+await page.keyboard.press('r'); await expectRate(1, 'R 從 1.8 切到 1');
 
 // iframe 裡的影片也要跟著（在最外層按鍵）
 await page.keyboard.press('x');

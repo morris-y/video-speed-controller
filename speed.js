@@ -18,8 +18,12 @@ globalThis.VSC = (() => {
       ? clampRate(preferred)
       : clampRate(current + direction * STEP);
 
+  // R：不在預設倍數就跳過去；已經在預設倍數才回 1×
+  const toggleRate = (current, preferred = DEFAULT_RATE) =>
+    clampRate(current) === clampRate(preferred) ? 1 : clampRate(preferred);
+
   // 倍數顯示：1.8 → "1.8"、2 → "2"、1.25 → "1.25"
   const formatRate = (rate) => String(Math.round(rate * 100) / 100);
 
-  return { MIN_RATE, MAX_RATE, STEP, DEFAULT_RATE, clampRate, nextRate, formatRate };
+  return { MIN_RATE, MAX_RATE, STEP, DEFAULT_RATE, clampRate, nextRate, toggleRate, formatRate };
 })();
