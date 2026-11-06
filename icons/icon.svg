@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- A: speed gauge. Dial arc with a play-triangle needle swung toward "fast". -->
+  <circle cx="64" cy="64" r="48" fill="#FF5B1F"/>
+  <path d="M32.82 82 A36 36 0 1 1 95.18 82" fill="none" stroke="#FFFFFF" stroke-opacity=".38" stroke-width="9" stroke-linecap="round"/>
+  <path d="M32.82 82 A36 36 0 0 1 93.49 43.35" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"/>
+  <path d="M88.57 46.79 L69.16 71.37 L58.84 56.63 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="64" cy="64" r="9" fill="#FFFFFF"/>
+  <circle cx="64" cy="64" r="3.5" fill="#FF5B1F"/>
+</svg>

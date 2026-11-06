@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+  <!-- A, 16 px cut: disc, half-dial arc, steep needle, hub. Track arc dropped. -->
+  <circle cx="8" cy="8" r="7.5" fill="#FF5B1F"/>
+  <path d="M3.0 9.5 A5 5 0 0 1 13.0 9.5" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-opacity=".55"/>
+  <path d="M3.0 9.5 A5 5 0 0 1 8.0 4.5" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M8 9.5 L10.44 5.6" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="8" cy="9.5" r="1.6" fill="#FFFFFF"/>
+</svg>

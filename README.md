@@ -50,7 +50,7 @@ zip -r video-speed-controller.zip . -x '.git/*' 'node_modules/*' '*.zip' '.DS_St
 | `background.js` | 以「分頁」為單位記住倍數，再廣播給該分頁的所有 frame |
 | `popup.js` / `popup.html` | 工具列彈窗 |
 | `_locales/` | 介面文字：英文（預設）、繁中 `zh_TW`、簡中 `zh_CN`。Chrome 依瀏覽器語言自動挑，其他語言一律顯示英文 |
-| `icons/generate.py` | 重新產生圖示用（沒有它就沒辦法重建 PNG） |
+| `icons/icon.svg`、`icons/icon-16.svg` | 圖示向量原稿（16 px 另有一份手調版）。改完跑 `node icons/render.mjs` 重新輸出 16／32／48／128 PNG |
 | `test.mjs` | 倍數計算的檢查，`node test.mjs` |
 
 ### 三個容易踩到的地方
