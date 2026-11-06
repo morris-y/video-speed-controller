@@ -12,7 +12,7 @@
     "description": "Tooltip on the − button"
   },
   "fasterTitle": {
-    "message": "加速",
+    "message": "加速 0.1×",
     "description": "Tooltip on the + button"
   },
   "rateLabel": {
