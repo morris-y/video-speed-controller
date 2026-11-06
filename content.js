@@ -83,7 +83,7 @@
 
   chrome.runtime.onMessage.addListener((msg, _sender, reply) => {
     if (msg?.type === 'apply') applyToFrame(msg.rate);
-    else if (msg?.type === 'toast') toast(`${formatRate(msg.rate)}×`);
+    else if (msg?.type === 'toast') toast(chrome.i18n.getMessage('rateToast', formatRate(msg.rate)));
     else if (msg?.type === 'ping') reply({ ok: true }); // 彈窗用來確認這個頁面能不能控制
   });
 

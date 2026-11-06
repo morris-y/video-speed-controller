@@ -1,4 +1,13 @@
 const { formatRate } = globalThis.VSC;
+const t = (key) => chrome.i18n.getMessage(key);
+
+// 介面文字全部來自 _locales/<語言>/messages.json，HTML 只標 key
+document.documentElement.lang = chrome.i18n.getUILanguage();
+document.querySelectorAll('[data-i18n]').forEach((el) => (el.textContent = t(el.dataset.i18n)));
+document.querySelectorAll('[data-i18n-title]').forEach((el) => (el.title = t(el.dataset.i18nTitle)));
+document.querySelectorAll('[data-i18n-aria-label]').forEach((el) =>
+  el.setAttribute('aria-label', t(el.dataset.i18nAriaLabel)));
+
 const input = document.getElementById('rate');
 const buttons = [...document.querySelectorAll('button')];
 
@@ -37,13 +46,13 @@ input.addEventListener('focus', () => input.select());
 
 (async () => {
   const id = await tabId;
-  if (id == null) return disable('找不到分頁');
+  if (id == null) return disable(t('noTab'));
   try {
     // chrome:// 或擴充功能商店這類頁面注入不了 content script，
     // 不先問一聲的話，彈窗會顯示一個看起來正常、實際上套用不到任何影片的數字
     await chrome.tabs.sendMessage(id, { type: 'ping' });
   } catch {
-    return disable('這個頁面不能用');
+    return disable(t('pageUnsupported'));
   }
   send({ type: 'get' });
 })();

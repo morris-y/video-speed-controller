@@ -49,6 +49,7 @@ zip -r video-speed-controller.zip . -x '.git/*' 'node_modules/*' '*.zip' '.DS_St
 | `content.js` | 注入到每個網頁：收快捷鍵、把倍數套到 `<video>`、右上角顯示提示 |
 | `background.js` | 以「分頁」為單位記住倍數，再廣播給該分頁的所有 frame |
 | `popup.js` / `popup.html` | 工具列彈窗 |
+| `_locales/` | 介面文字：英文（預設）、繁中 `zh_TW`、簡中 `zh_CN`。Chrome 依瀏覽器語言自動挑，其他語言一律顯示英文 |
 | `icons/generate.py` | 重新產生圖示用（沒有它就沒辦法重建 PNG） |
 | `test.mjs` | 倍數計算的檢查，`node test.mjs` |
 
@@ -76,7 +77,7 @@ zip -r video-speed-controller.zip . -x '.git/*' 'node_modules/*' '*.zip' '.DS_St
 node test.mjs
 ```
 
-`test.mjs` 只測倍數怎麼算（加減、R 切換、浮點誤差、上下限），不需要任何依賴。
+`test.mjs` 測倍數怎麼算（加減、R 切換、浮點誤差、上下限），並檢查三種語言的 `messages.json` key 一致、程式用到的每個 key 都有翻譯，不需要任何依賴。
 
 ```sh
 node e2e.mjs

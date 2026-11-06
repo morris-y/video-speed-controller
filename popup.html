@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html>
 <head>
 <meta charset="utf-8">
 <style>
@@ -11,6 +11,7 @@
     margin: 0; width: 232px; padding: 16px;
     font: 13px/1.5 system-ui, -apple-system, "PingFang TC", sans-serif; color: var(--fg);
   }
+  :lang(zh-CN) body { font-family: system-ui, -apple-system, "PingFang SC", sans-serif; }
   .row { display: flex; align-items: center; gap: 8px; }
   button {
     font: inherit; color: inherit; background: var(--btn);
@@ -27,6 +28,8 @@
   }
   #reset { width: 100%; height: 30px; margin-top: 10px; }
   p { margin: 12px 0 0; color: var(--muted); font-size: 11.5px; }
+  p > span { white-space: nowrap; }
+  p > span + span { margin-inline-start: 1em; }
   kbd {
     padding: 1px 5px; border: 1px solid var(--line); border-bottom-width: 2px;
     border-radius: 4px; font: 11px/1.4 ui-monospace, monospace;
@@ -35,12 +38,12 @@
 </head>
 <body>
   <div class="row">
-    <button class="step" id="slower" title="減速 0.1×">−</button>
-    <input id="rate" inputmode="decimal" autocomplete="off" aria-label="播放倍數">
-    <button class="step" id="faster" title="加速">+</button>
+    <button class="step" id="slower" data-i18n-title="slowerTitle">−</button>
+    <input id="rate" inputmode="decimal" autocomplete="off" data-i18n-aria-label="rateLabel">
+    <button class="step" id="faster" data-i18n-title="fasterTitle">+</button>
   </div>
-  <button id="reset">回到 1×</button>
-  <p><kbd>X</kbd> 加速　<kbd>Z</kbd> 減速　<kbd>R</kbd> 切換 1.8×／1×</p>
+  <button id="reset" data-i18n="resetButton"></button>
+  <p><span><kbd>X</kbd> <span data-i18n="hintFaster"></span></span><span><kbd>Z</kbd> <span data-i18n="hintSlower"></span></span><span><kbd>R</kbd> <span data-i18n="hintToggle"></span></span></p>
   <script src="speed.js"></script>
   <script src="popup.js"></script>
 </body>

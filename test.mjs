@@ -34,4 +34,37 @@ assert.equal(clampRate(0), MIN_RATE);
 assert.equal(clampRate(NaN), 1);
 assert.equal(clampRate(Number('abc')), 1);
 
-console.log('ok — 所有倍數計算檢查通過');
+// 三種語言的介面文字：任何一個語言少一個 key，那個語言的介面就會出現空白文字
+const read = (f) => readFileSync(new URL(f, import.meta.url), 'utf8');
+const LOCALES = ['en', 'zh_TW', 'zh_CN'];
+const messages = Object.fromEntries(
+  LOCALES.map((l) => [l, JSON.parse(read(`./_locales/${l}/messages.json`))])
+);
+const enKeys = Object.keys(messages.en).sort();
+for (const l of LOCALES) {
+  assert.deepEqual(Object.keys(messages[l]).sort(), enKeys, `${l} 的 key 和 en 不一致`);
+  for (const [k, v] of Object.entries(messages[l])) {
+    assert.ok(v.message?.trim(), `${l}.${k} 是空字串`);
+    // 有 $X$ 的訊息每個語言都要定義同一組 placeholder，否則會印出字面的 $RATE$
+    for (const [, name] of v.message.matchAll(/\$(\w+)\$/g))
+      assert.ok(v.placeholders?.[name.toLowerCase()], `${l}.${k} 缺 placeholder ${name}`);
+  }
+}
+
+const manifest = JSON.parse(read('./manifest.json'));
+const used = new Set([
+  ...read('./manifest.json').matchAll(/__MSG_(\w+)__/g),
+  ...['popup.html', 'popup.js', 'content.js'].flatMap((f) => [
+    ...read(`./${f}`).matchAll(/(?:getMessage|\bt)\(\s*'(\w+)'/g),
+    ...read(`./${f}`).matchAll(/data-i18n(?:-[\w-]+)?="(\w+)"/g),
+  ]),
+].map((m) => m[1]));
+assert.ok(used.size >= 10, `只找到 ${used.size} 個 key，抓 key 的規則可能失效了`);
+for (const k of used) assert.ok(messages.en[k], `程式用了 ${k}，但 messages.json 沒有`);
+for (const k of enKeys) assert.ok(used.has(k), `messages.json 的 ${k} 沒有任何地方用到`);
+assert.equal(manifest.default_locale, 'en');
+// 商店摘要上限 132 字，manifest 的 description 也適用
+for (const l of LOCALES)
+  assert.ok(messages[l].extDescription.message.length <= 132, `${l} 的描述超過 132 字`);
+
+console.log(`ok — 所有倍數計算檢查通過；${LOCALES.length} 種語言 × ${enKeys.length} 個 key 齊全`);

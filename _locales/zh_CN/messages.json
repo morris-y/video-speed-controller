@@ -1,0 +1,56 @@
+{
+  "extName": {
+    "message": "Video Speed Controller",
+    "description": "Extension name; keep in English in every locale"
+  },
+  "extDescription": {
+    "message": "用 X / Z / R 快捷键调节任意网页视频的播放速度，也可以在弹窗里手动输入倍速。",
+    "description": "Store summary; at most 132 characters"
+  },
+  "slowerTitle": {
+    "message": "减速 0.1×",
+    "description": "Tooltip on the − button"
+  },
+  "fasterTitle": {
+    "message": "加速",
+    "description": "Tooltip on the + button"
+  },
+  "rateLabel": {
+    "message": "播放倍速",
+    "description": "Accessible name of the speed input"
+  },
+  "resetButton": {
+    "message": "恢复 1×",
+    "description": "Button that resets the speed"
+  },
+  "hintFaster": {
+    "message": "加速",
+    "description": "Shortcut hint next to the X key"
+  },
+  "hintSlower": {
+    "message": "减速",
+    "description": "Shortcut hint next to the Z key"
+  },
+  "hintToggle": {
+    "message": "切换 1.8×／1×",
+    "description": "Shortcut hint next to the R key"
+  },
+  "noTab": {
+    "message": "找不到标签页",
+    "description": "Placeholder when the popup cannot find the active tab"
+  },
+  "pageUnsupported": {
+    "message": "当前页面无法使用",
+    "description": "Placeholder when the page blocks extensions, e.g. chrome:// pages"
+  },
+  "rateToast": {
+    "message": "$RATE$×",
+    "description": "On-page toast showing the new speed",
+    "placeholders": {
+      "rate": {
+        "content": "$1",
+        "example": "1.8"
+      }
+    }
+  }
+}

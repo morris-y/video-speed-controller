@@ -1,0 +1,56 @@
+{
+  "extName": {
+    "message": "Video Speed Controller",
+    "description": "Extension name; keep in English in every locale"
+  },
+  "extDescription": {
+    "message": "Control the playback speed of any video on the web with the X / Z / R keys, or type a speed in the popup.",
+    "description": "Store summary; at most 132 characters"
+  },
+  "slowerTitle": {
+    "message": "Slow down 0.1×",
+    "description": "Tooltip on the − button"
+  },
+  "fasterTitle": {
+    "message": "Speed up",
+    "description": "Tooltip on the + button"
+  },
+  "rateLabel": {
+    "message": "Playback speed",
+    "description": "Accessible name of the speed input"
+  },
+  "resetButton": {
+    "message": "Back to 1×",
+    "description": "Button that resets the speed"
+  },
+  "hintFaster": {
+    "message": "Faster",
+    "description": "Shortcut hint next to the X key"
+  },
+  "hintSlower": {
+    "message": "Slower",
+    "description": "Shortcut hint next to the Z key"
+  },
+  "hintToggle": {
+    "message": "1.8×/1×",
+    "description": "Shortcut hint next to the R key"
+  },
+  "noTab": {
+    "message": "No tab found",
+    "description": "Placeholder when the popup cannot find the active tab"
+  },
+  "pageUnsupported": {
+    "message": "Not available here",
+    "description": "Placeholder when the page blocks extensions, e.g. chrome:// pages"
+  },
+  "rateToast": {
+    "message": "$RATE$×",
+    "description": "On-page toast showing the new speed",
+    "placeholders": {
+      "rate": {
+        "content": "$1",
+        "example": "1.8"
+      }
+    }
+  }
+}
