@@ -93,6 +93,6 @@ Also:
 
 ## Privacy policy (all languages, short)
 
-Video Speed Controller stores one value per open tab: the playback speed you chose, in `chrome.storage.session`.
+Pacekey stores one value per open tab: the playback speed you chose, in `chrome.storage.session`.
 It is deleted when the tab closes and never leaves your browser. The extension collects no personal data,
 sends nothing to any server, has no analytics and no remote code.

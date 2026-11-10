@@ -1,4 +1,4 @@
-# Video Speed Controller
+# Pacekey – Video Speed Controller
 
 用鍵盤控制任何網頁影片的播放速度的 Chrome 擴充功能。純原生 JavaScript，沒有任何依賴，不需要編譯。
 

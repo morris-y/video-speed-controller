@@ -433,7 +433,7 @@ function promoSmall(loc) {
   const L = LOCALES[loc];
   return doc(L, 440, 280, `
     <img src="${ICON_URI}" style="position:absolute;left:30px;top:34px;width:84px;height:84px">
-    <div style="position:absolute;left:40px;top:136px;font:700 31px/1.1 ${LATIN};letter-spacing:-0.01em;white-space:nowrap">Video Speed Controller</div>
+    <div style="position:absolute;left:40px;top:136px;font:700 31px/1.1 ${LATIN};letter-spacing:-0.01em;white-space:nowrap">Pacekey</div>
     <div style="position:absolute;left:40px;top:186px;font-size:23px;line-height:1.3;font-weight:${L.weight};color:${ORANGE};white-space:nowrap">${esc(COPY[loc].tagline)}</div>`);
 }
 
@@ -442,7 +442,7 @@ function marquee(loc, cap) {
   const popW = 264 * 1.45;
   return doc(L, 1400, 560, `
     <img src="${ICON_URI}" style="position:absolute;left:78px;top:92px;width:132px;height:132px">
-    <div style="position:absolute;left:96px;top:250px;font:700 62px/1.1 ${LATIN};letter-spacing:-0.02em;white-space:nowrap">Video Speed Controller</div>
+    <div style="position:absolute;left:96px;top:250px;font:700 62px/1.1 ${LATIN};letter-spacing:-0.02em;white-space:nowrap">Pacekey</div>
     <div style="position:absolute;left:96px;top:340px;font-size:38px;line-height:1.3;font-weight:${L.weight};color:${ORANGE};white-space:nowrap">${esc(COPY[loc].tagline)}</div>
     <img src="${img(cap.shots.popup)}" style="position:absolute;left:${1400 - 110 - popW}px;top:116px;width:${popW}px;border-radius:12px">
     ${keys(1400 - 110 - popW + (popW - (3 * 68 + 2 * 14)) / 2, 378, 'R')}`);
